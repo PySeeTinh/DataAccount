@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        .dashboard {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+        }
+
+        .dashboard h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .user-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .user-list div {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-list div p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .dashboard button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #00bcd4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dashboard button:hover {
+            background-color: #0097a7;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Registered Users</h1>
+        <div class="user-list" id="user-list">
+            <!-- Các tài khoản sẽ được hiển thị tại đây -->
+        </div>
+        <button onclick="logout()">Clear Account</button>
+    </div>
+
+    <script>
+        // Lấy danh sách người dùng từ localStorage
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Hiển thị danh sách người dùng
+        const userListContainer = document.getElementById("user-list");
+
+        if (users.length === 0) {
+            userListContainer.innerHTML = "<p>No users registered yet.</p>";
+        } else {
+            users.forEach(user => {
+                const userDiv = document.createElement("div");
+                userDiv.innerHTML = `
+                    <p><strong>Name:</strong> ${user.name}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <p><strong>Password:</strong> ${user.password}</p>
+                `;
+                userListContainer.appendChild(userDiv);
+            });
+        }
+
+        // Hàm đăng xuất
+        function logout() {
+            alert("You have been delete account !");
+            window.location.href = "login.html"; // Chuyển về trang đăng nhập
+        }
+    </script>
+</body>
+</html>
